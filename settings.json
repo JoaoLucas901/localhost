@@ -1,0 +1,8 @@
+{
+  "workbench.iconTheme": "material-iconTheme",
+  "workbench.colorTheme": "Dracula Theme",
+  "files.autoSave": "afterDelay",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+  },
+}
