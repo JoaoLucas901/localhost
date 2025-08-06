@@ -1,10 +1,24 @@
 import { Flex, Image, VStack, Heading, Text, Input, Stack, Button, Link as ChakraLink, HStack, Field } from "@chakra-ui/react";
 import loginImage from "../../public/assets/login-image.gif";
+import { useForm } from "react-hook-form";
+import z from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import NextLink from "next/link";
 import { PasswordInput } from "@/components/ui/password-input";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const signInFormSchema = z.object({
+  email: z.email("Email é obrigatório").nonempty("Digite um email válido"),
+  password: z.string().nonempty("Senha é obrigatória").min(8, "A senha deve ter pelo menos 8 caracteres"),
+});
+
+type signInFormData = z.infer<typeof signInFormSchema>;
 
 export default function Login() {
+  const { register, handleSubmit } = useForm({
+    resolver: zodResolver(signInFormSchema),
+  });
+
     return (
         <Flex w="100vw" h="100vh">
           <Flex w="50%" bg="#2C73EB" align="center" justify="center">
@@ -22,14 +36,14 @@ export default function Login() {
                   <Field.Label color="gray.500" fontSize="md">
                   Email
                   </Field.Label>
-                  <Input type="email" h={16} colorPalette="blue" borderRadius="md" color="black" />
+                  <Input type="email" h={16} colorPalette="blue" borderRadius="md" color="black" {...register("email")} />
                   </Field.Root>
 
                   <Field.Root>
                   <Field.Label color="gray.500" fontSize="md">
                   Senha
                   </Field.Label>
-                  <PasswordInput h={16} colorPalette="blue" borderRadius="md" color="black" />
+                  <PasswordInput h={16} colorPalette="blue" borderRadius="md" color="black" {...register("password")} />
                   </Field.Root>
 
               <Checkbox colorPalette="blue" color="gray.500" fontSize="md" fontWeight="medium">
