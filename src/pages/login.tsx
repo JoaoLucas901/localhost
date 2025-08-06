@@ -20,6 +20,10 @@ export default function Login() {
     resolver: zodResolver(signInFormSchema),
   });
 
+  function handleSignIn(data: signInFormData) {
+    console.log(data);
+  }
+
     return (
         <Flex w="100vw" h="100vh">
           <Flex w="50%" bg="#2C73EB" align="center" justify="center">
@@ -32,7 +36,7 @@ export default function Login() {
             <Heading as="h1" fontSize="3xl" fontWeight="bold" color="black">Login</Heading>
             <Text as="h1" fontSize="lg" fontWeight="normal" color="gray.400">Se você já for um membro, já pode ir logando com seu e-mail e senha.</Text>
 
-            <VStack align="flex-start" gap={6} mt={10}>
+            <VStack as="form" onSubmit={handleSubmit(handleSignIn)} align="flex-start" gap={6} mt={10}>
                   <Field.Root invalid={!!errors.email}>
                   <Field.Label color="gray.500" fontSize="md">
                   Email
