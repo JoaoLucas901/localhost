@@ -1,7 +1,8 @@
-import { Flex, Image, VStack, Heading, Text, Input, Stack, Button, Link as ChakraLink, HStack } from "@chakra-ui/react";
+import { Flex, Image, VStack, Heading, Text, Input, Stack, Button, Link as ChakraLink, HStack, Field } from "@chakra-ui/react";
 import loginImage from "../../public/assets/login-image.gif";
 import { Checkbox } from "@/components/ui/checkbox";
 import NextLink from "next/link";
+import { PasswordInput } from "@/components/ui/password-input";
 
 export default function Login() {
     return (
@@ -16,17 +17,26 @@ export default function Login() {
             <Heading as="h1" fontSize="3xl" fontWeight="bold" color="black">Login</Heading>
             <Text as="h1" fontSize="lg" fontWeight="normal" color="gray.400">Se você já for um membro, já pode ir logando com seu e-mail e senha.</Text>
 
-            <VStack align="flex-start" gap={6}>
+            <VStack align="flex-start" gap={6} mt={10}>
+                  <Field.Root>
+                  <Field.Label color="gray.500" fontSize="md">
+                  Email
+                  </Field.Label>
+                  <Input type="email" h={16} colorPalette="blue" borderRadius="md" color="black" />
+                  </Field.Root>
 
-              <Input />
-
-              <Input />
+                  <Field.Root>
+                  <Field.Label color="gray.500" fontSize="md">
+                  Senha
+                  </Field.Label>
+                  <PasswordInput h={16} colorPalette="blue" borderRadius="md" color="black" />
+                  </Field.Root>
 
               <Checkbox colorPalette="blue" color="gray.500" fontSize="md" fontWeight="medium">
                 Lembrar meu login
               </Checkbox>
 
-              <Button w="full" h={16} colorPalette="blue" borderRadius="md" fontSize="md" fontWeight="medium">
+              <Button type="submit" w="full" h={16} colorPalette="blue" borderRadius="md" fontSize="md" fontWeight="medium">
                 Entrar
               </Button>
               </VStack>
