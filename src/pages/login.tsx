@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import NextLink from "next/link";
 import { PasswordInput } from "@/components/ui/password-input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { error } from "console";
 
 const signInFormSchema = z.object({
   email: z.email("Email é obrigatório").nonempty("Digite um email válido"),
@@ -15,7 +16,7 @@ const signInFormSchema = z.object({
 type signInFormData = z.infer<typeof signInFormSchema>;
 
 export default function Login() {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(signInFormSchema),
   });
 
@@ -32,18 +33,24 @@ export default function Login() {
             <Text as="h1" fontSize="lg" fontWeight="normal" color="gray.400">Se você já for um membro, já pode ir logando com seu e-mail e senha.</Text>
 
             <VStack align="flex-start" gap={6} mt={10}>
-                  <Field.Root>
+                  <Field.Root invalid={!!errors.email}>
                   <Field.Label color="gray.500" fontSize="md">
                   Email
                   </Field.Label>
                   <Input type="email" h={16} colorPalette="blue" borderRadius="md" color="black" {...register("email")} />
+                  <Field.ErrorText>
+                    {errors.email?.message}
+                  </Field.ErrorText>
                   </Field.Root>
 
-                  <Field.Root>
+                  <Field.Root invalid={!!errors.password}>
                   <Field.Label color="gray.500" fontSize="md">
                   Senha
                   </Field.Label>
                   <PasswordInput h={16} colorPalette="blue" borderRadius="md" color="black" {...register("password")} />
+                  <Field.ErrorText>
+                    {errors.password?.message}
+                  </Field.ErrorText>
                   </Field.Root>
 
               <Checkbox colorPalette="blue" color="gray.500" fontSize="md" fontWeight="medium">
