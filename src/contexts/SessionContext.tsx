@@ -1,5 +1,5 @@
 import { create } from "domain";
-import { setCookie } from "nookies";
+import { destroyCookie, setCookie } from "nookies";
 import { createContext, ReactNode, useContext, useState } from "react";
 import { set } from "zod";
 
@@ -26,11 +26,13 @@ type SessionContextData = {
 const SessionContext = createContext({} as SessionContextData);
 
 export async function signIn({ username, password }: Credentials) {
-  
+
 }
 
 export async function signOut() {
-
+  destroyCookie(null, CESUL_USER, {
+    path: "/",
+  });
 }
 
 interface SessionProviderProps {
