@@ -1,43 +1,36 @@
 import { Flex, Group, IconButton, Image, Separator } from "@chakra-ui/react";
-import { IoMdHelpCircle, IoMdMenu, IoMdMoon, IoMdNotifications, IoMdSettings, IoMdSunny } from "react-icons/io";
 
-import { Avatar } from "../ui/avatar";
-import { useColorMode } from "../ui/color-mode";
 import { Logo } from "./Logo";
+import { Notifications } from "./Notifications";
+import { Help } from "./Help";
+import { Settings } from "./Settings";
+import { ColorMode } from "./ColorMode";
+import { Profile } from "./Profile";
+import { Menu } from "./Menu";
 
 export function DefaultHeader() {
-  const { toggleColorMode, colorMode } = useColorMode();
 
   return (
     <Flex w="full" justify="space-between" borderBottomWidth={1} py={2} px={4}>
         <Flex align="center" gap={4}>
-          <IconButton variant="ghost" rounded="full">
-            <IoMdMenu />
-          </IconButton>
+          <Menu />
 
           <Logo />
         </Flex>
 
         <Group>
-          <IconButton variant="ghost" rounded="full">
-            <IoMdNotifications />
-          </IconButton>
+          <Notifications />
 
-          <IconButton variant="ghost" rounded="full">
-            <IoMdHelpCircle />
-          </IconButton>
+          <Help />
 
-          <IconButton variant="ghost" rounded="full">
-            <IoMdSettings />
-          </IconButton>
+          <Settings />
 
-          <IconButton variant="ghost" rounded="full" onClick={toggleColorMode}>
-            {colorMode === 'dark' ? <IoMdMoon /> : <IoMdSunny />}
-          </IconButton>
+          <ColorMode />
 
           <Separator h={6} orientation="vertical" mx={2} />
 
-          <Avatar name="Juliano Ramos" colorPalette="purple" src="https://avatars.githubusercontent.com/u/128654794?v=4" />
+          <Profile />
+
         </Group>
       </Flex>
   )
