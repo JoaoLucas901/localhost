@@ -1,4 +1,4 @@
-import { Flex, Group, IconButton, Image, Separator } from "@chakra-ui/react";
+import { Flex, Group, Separator } from "@chakra-ui/react";
 
 import { Logo } from "./Logo";
 import { Notifications } from "./Notifications";
@@ -11,7 +11,7 @@ import { Menu } from "./Menu";
 export function DefaultHeader() {
 
   return (
-    <Flex w="full" justify="space-between" borderBottomWidth={1} py={2} px={4}>
+    <Flex as="header" w="full" justify="space-between" borderBottomWidth={1} py={2} px={4}>
         <Flex align="center" gap={4}>
           <Menu />
 
