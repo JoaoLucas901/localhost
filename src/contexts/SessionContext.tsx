@@ -1,7 +1,6 @@
 import { destroyCookie, setCookie } from "nookies";
 import { createContext, ReactNode, useContext, useState } from "react";
 import { api } from "@/services/apiClient";
-import path from "path";
 
 const CESUL_USER = "cesul.user";
 const CESUL_TOKEN = "cesul.token";
@@ -27,15 +26,15 @@ type SessionContextData = {
 const SessionContext = createContext({} as SessionContextData);
 
 function removeCookie(name: string) {
-  destroyCookie(null, name, {
+   destroyCookie(null, name, {
     path: "/"
-  })
+  });
 }
 
 export async function signOut() {
- removeCookie(CESUL_USER);
- removeCookie(CESUL_TOKEN);
- removeCookie(CESUL_REFRESHTOKEN);
+  removeCookie(CESUL_USER);
+  removeCookie(CESUL_TOKEN);
+  removeCookie(CESUL_REFRESHTOKEN);
 }
 
 interface SessionProviderProps {
