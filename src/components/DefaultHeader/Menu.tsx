@@ -1,13 +1,16 @@
 import { Button, CloseButton, Drawer, IconButton, Portal, VStack } from "@chakra-ui/react";
 import { IoIosBook, IoMdMenu, IoMdPeople } from "react-icons/io";
-import { RiDashboard2Fill } from "react-icons/ri";
+import { RiDashboardFill } from "react-icons/ri";
 import { NavigationItem } from "./NativationItem";
 import { TiThumbsOk } from "react-icons/ti";
 import { FaGraduationCap } from "react-icons/fa";
-import { MdLibraryBooks } from "react-icons/md";
+import { MdLibraryBooks, MdLogout } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
+import { useRouter } from "next/router";
+import { signOut } from "@/contexts/SessionContext";
 
 export function Menu() {
+  const router = useRouter();
   return (
     <Drawer.Root size="md" placement="start">
       <Drawer.Trigger asChild>
@@ -26,27 +29,55 @@ export function Menu() {
 
             <Drawer.Body>
               <VStack>
-              <NavigationItem icon={<RiDashboard2Fill />} label="Dashboard" />
+              <NavigationItem
+              icon={<RiDashboardFill />}
+              label="Dashboard"
+              onClick={() => router.push('/')}
+              />
 
-              <NavigationItem icon={<IoMdPeople />} label="Estudantes" />
+              <NavigationItem
+              icon={<IoMdPeople />}
+              label="Estudantes"
+              onClick={() => router.push('/students')}
+              />
 
-              <NavigationItem icon={<FaGraduationCap />} label="Professores" />
+              <NavigationItem
+              icon={<FaGraduationCap />}
+              label="Professores"
+              onClick={() => router.push('/teachers')}
+              />
 
-              <NavigationItem icon={<IoIosBook />} label="Cursos" />
+              <NavigationItem
+              icon={<IoIosBook />}
+              label="Cursos"
+              onClick={() => router.push('/courses')}
+              />
 
-              <NavigationItem icon={<MdLibraryBooks />} label="Notas" />
+              <NavigationItem
+              icon={<MdLibraryBooks />}
+              label="Notas"
+              onClick={() => router.push('/grades')}
+              />
 
-              <NavigationItem icon={<GrNotes />} label="Matrículas" />
+              <NavigationItem
+              icon={<GrNotes />}
+              label="Matrículas"
+              onClick={() => router.push('/enrollment')}
+              />
 
-              <NavigationItem icon={<TiThumbsOk />} label="Lagarto Bird" />
+              <NavigationItem
+              icon={<TiThumbsOk />}
+              label="Calendário"
+              onClick={() => router.push('/calendar')}
+              />
 
               </VStack>
             </Drawer.Body>
 
 
             <Drawer.Footer>
-              <Button variant="outline">Cancel</Button>
-              <Button>Save</Button>
+              <NavigationItem icon={<MdLogout />} label="Sair" onClick={signOut}/>
+
             </Drawer.Footer>
 
             <Drawer.CloseTrigger asChild>
