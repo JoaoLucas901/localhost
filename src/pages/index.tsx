@@ -1,13 +1,15 @@
-import { HStack } from "@chakra-ui/react";
+import { Card, Flex, Heading, HStack, Icon, VStack, Text } from "@chakra-ui/react";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
 import { IoMdPeople } from "react-icons/io";
 import { FaUserGraduate } from "react-icons/fa";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { BiBookAdd } from "react-icons/bi";
 import { IndicatorCard } from "@/components/IndicatorCard";
+import { RecentActivity } from "@/components/RecentActivity";
 
 export default function Home() {
   return (
+    
     <DefaultLayout
 
     title="Dashboard Acadêmica"
@@ -49,6 +51,42 @@ export default function Home() {
           colorPalette="orange"
         />
 
+      </HStack>
+      <HStack mt={8}>
+            <Card.Root>
+              <Card.Header>
+                <Card.Title>Atividades recentes</Card.Title>
+              </Card.Header>
+              <Card.Body alignItems="center" gap={6}>
+              <RecentActivity
+              icon={IoMdPeople}
+              title="Nova Matrícula: Maria Silva - Engenharia de Software"
+              dateTime="2 min atrás"
+              color="blue"
+              />
+
+              <RecentActivity
+              icon={FaUserGraduate}
+              title="Novo Professor: Dr. João Souza - Matemática"
+              dateTime="10 min atrás"
+              color="green"
+              />
+
+              <RecentActivity
+              icon={BiBookAdd}
+              title="Novo Curso: Ciência de Dados"
+              dateTime="30 min atrás"
+              color="red"
+              />
+
+              <RecentActivity
+              icon={FaArrowTrendUp}
+              title="Relatório de Desempenho Acadêmico Gerado"
+              dateTime="1 hora atrás"
+              color="orange"
+              />
+            </Card.Body>
+          </Card.Root>
       </HStack>
     </DefaultLayout>
   );
