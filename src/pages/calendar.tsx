@@ -4,11 +4,10 @@ import { DefaultLayout } from "@/layouts/DefaultLayout";
 export default function Calendar() {
   return (
     <DefaultLayout
-
-    title="Calendário Acadêmico"
-    description="Visão Geral do Sistema do Calendário"
+      title="Calendário Acadêmico"
+      description="Calendário"
     >
-      <Heading color="red">DASHBOARD DO CALENDÁRIO!</Heading>
+      <Heading color="red"> Calendário </Heading>
     </DefaultLayout>
-  )
+  );
 }
