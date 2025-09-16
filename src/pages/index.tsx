@@ -1,15 +1,16 @@
-import { Card, HStack } from "@chakra-ui/react";
-import { BiAward, BiCalendar } from "react-icons/bi";
-import { FaGraduationCap } from "react-icons/fa";
+import { Card, ColorPalette, HStack, Stack, VStack } from "@chakra-ui/react";
+import { BiAward } from "react-icons/bi";
+import { FaUserGraduate } from "react-icons/fa";
 import { FaArrowTrendUp } from "react-icons/fa6";
-import { ImBooks } from "react-icons/im";
-import { IoIosBook, IoMdPeople } from "react-icons/io";
-import { IoPeopleSharp } from "react-icons/io5";
+import { IoMdCalendar, IoMdPeople } from "react-icons/io";
+import { MdLibraryBooks } from "react-icons/md";
 import { IndicatorCard } from "@/components/IndicatorCard";
-import { RecentActivity } from "@/components/RecentActivity";
+import { CustomCard } from "@/components/CustomCard";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
+import { ImCalendar } from "react-icons/im";
 import { IconType } from "react-icons";
 import { AiFillQuestionCircle } from "react-icons/ai";
+import { IoAlertCircle } from "react-icons/io5";
 
 export default function Home() {
   const recentActivities = [
@@ -28,7 +29,7 @@ export default function Home() {
     {
       id: 3,
       type: "course",
-      title: "Novo curso criado: Análise de Ddoas",
+      title: "Novo curso criado: Análise de Dados",
       time: "1 hora atrás",
     },
     {
@@ -39,77 +40,130 @@ export default function Home() {
     },
   ];
 
+  const customCards = [
+    {
+      id: 1,
+      type: "exam",
+      title: "Inicio das provas finais",
+      color:"red",
+      time: "14 Dez 2025 08:00",
+    },
+    {
+      id: 2,
+      type: "meeting",
+      title: "Reunião de coordenadores",
+      color:"blue",
+      time: "18 Dez 2025 ás 14:00",
+    },
+    {
+      id: 3,
+      type: "deadline",
+      title: "Fim do Semestre",
+      color:"orange",
+      time: "20 Dez 2025 ás 17:00",
+    },
+
+  ];
+
   const iconMap: Record<string, IconType> = {
     enrollment: IoMdPeople,
     grade: BiAward,
-    course: IoIosBook,
-    calendar: BiCalendar,
+    course: MdLibraryBooks,
+    calendar: ImCalendar,
   };
 
+  const iconMapEvents: Record<string, IconType> = {
+    exam: IoAlertCircle,
+    meeting: IoMdPeople,
+    deadline: IoMdCalendar,
+
+  };
   return (
     <DefaultLayout
-      title="Dashboard Acadêmico"
-      description="Visão geral do sistema universitáro"
+      title="Dashboard acadêmica"
+      description="visão geral do sistema universitário"
     >
-      <HStack gap={8}>
+      <HStack >
         <IndicatorCard
-          label="Total de Estudantes"
-          value={2342}
-          indicator="-32% este mes"
-          icon={IoPeopleSharp}
+          icon={IoMdPeople}
+          label={"Total de estudantes"}
+          value={2847}
+          indicator="-12% este mês"
           colorPallete="blue"
         />
 
         <IndicatorCard
-          label="Professor Ativos"
-          value={53}
-          indicator="+1% este mes"
-          icon={FaGraduationCap}
-          colorPallete="green"
-        />
-
-        <IndicatorCard
-          label="Cursos Oferecidos"
-          value={17}
-          indicator="+3% este mes"
-          icon={ImBooks}
+          icon={FaUserGraduate}
+          label={"Total de professores"}
+          value={25}
+          indicator="+15% este mês"
           colorPallete="red"
         />
 
         <IndicatorCard
-          label="Taxa de Aprovação"
-          value={0.23}
+          icon={MdLibraryBooks}
+          label={"Cursos oferecidos"}
+          value={34}
+          indicator="+20% este mês"
+          colorPallete="yellow"
+        />
+
+        <IndicatorCard
+          icon={FaArrowTrendUp}
+          label={"Taxa de aprovação"}
+          value={0.892}
           style="percent"
           minimumFractionDigits={2}
           maximumFractionDigits={2}
-          indicator="+12% este mes"
-          icon={FaArrowTrendUp}
-          colorPallete="orange"
+          indicator="+18% este mês"
+          colorPallete="green"
         />
       </HStack>
 
-      <HStack mt={8}>
-        <Card.Root>
+      <HStack mt={8} gap={8} align="start">
+        <Card.Root >
           <Card.Header>
             <Card.Title>Atividades recentes</Card.Title>
           </Card.Header>
-          <Card.Body gap={6}>
+          <Card.Body gap={10}>
             {recentActivities.map((activity) => {
               const ActivityIcon =
                 iconMap[activity.type] ?? AiFillQuestionCircle;
               return (
-                <RecentActivity
+                <CustomCard
                   key={activity.id}
                   color="blue"
                   icon={ActivityIcon}
                   title={activity.title}
-                  time={activity.time}
+                  dateTime={activity.time}
+                />
+              );
+            })}
+          </Card.Body>
+        </Card.Root>
+
+        <Card.Root >
+          <Card.Header>
+            <Card.Title>Próximos eventos</Card.Title>
+          </Card.Header>
+          <Card.Body gap={10}>
+            {customCards.map((events) => {
+              const EventsIcon =
+                iconMapEvents[events.type] ?? AiFillQuestionCircle;
+              return (
+                <CustomCard
+                  key={events.id}
+                  color={events.color as ColorPalette}
+                  icon={EventsIcon}
+                  title={events.title}
+                  dateTime={events.time}
                 />
               );
             })}
           </Card.Body>
         </Card.Root>
       </HStack>
+
     </DefaultLayout>
   );
 }
