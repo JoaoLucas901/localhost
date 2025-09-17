@@ -65,7 +65,7 @@ export default function Home() {
 
   ];
 
-  const iconMap: Record<string, IconType> = {
+  const iconMapActivities: Record<string, IconType> = {
     enrollment: IoMdPeople,
     grade: BiAward,
     course: MdLibraryBooks,
@@ -128,7 +128,7 @@ export default function Home() {
           <Card.Body gap={10}>
             {recentActivities.map((activity) => {
               const ActivityIcon =
-                iconMap[activity.type] ?? AiFillQuestionCircle;
+                iconMapActivities[activity.type] ?? AiFillQuestionCircle;
               return (
                 <CustomCard
                   key={activity.id}
