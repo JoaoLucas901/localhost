@@ -1,10 +1,10 @@
-import { IconButton } from "@chakra-ui/react"
-import { IoMdHelpCircle } from "react-icons/io"
+import { IconButton } from "@chakra-ui/react";
+import { LuCircleHelp } from "react-icons/lu";
 
 export function Help() {
   return (
     <IconButton variant="ghost" rounded="full">
-      <IoMdHelpCircle />
+      <LuCircleHelp />
     </IconButton>
-  )
+  );
 }
