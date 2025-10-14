@@ -6,7 +6,7 @@ import { FilterButton } from "./FilterButton";
 import { FilterSelect } from "./FilterSelect";
 import { SearchInput } from "./SearchInput";
 
-export function StudentsHeader() {
+export function HeaderTable() {
   const status = createListCollection({
     items: [
       { label: "Inátivo", value: "inativo" },

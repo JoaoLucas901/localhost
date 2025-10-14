@@ -5,7 +5,7 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 import { IoMdCalendar, IoMdPeople } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import { IndicatorCard } from "@/components/IndicatorCard";
-import { CustomCard } from "@/components/CustomCard";
+import { CustomCard } from "@/components/HeaderTable/CustomCard";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
 import { ImCalendar } from "react-icons/im";
 import { IconType } from "react-icons";
