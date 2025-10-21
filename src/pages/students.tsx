@@ -1,8 +1,10 @@
-import { VStack } from "@chakra-ui/react";
-import { HeaderTable } from "@/components/HeaderTable";
+import { VStack} from "@chakra-ui/react";
+import { createColumnHelper } from "@tanstack/react-table";
+import { useEffect, useState } from "react";
+import { StudentsHeader } from "@/components/HeaderTable/StudentsHeader";
 import { Table } from "@/components/Table";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
-import { createColumnHelper } from "@tanstack/react-table";
+import { api } from "@/services/apiClient";
 
 type Student = {
   fullname: string,
@@ -13,78 +15,130 @@ type Student = {
   enrollment: string,
 }
 
+type GetStudentResponse = {
+  students: Student[];
+}
+
 export default function Students() {
   const data: Student[] = [
-   {
-    fullname: "Ana Beatriz Silva",
-    email: "ana.silva@email.com",
-    course: "Engenharia de Software",
-    semester: "5º",
-    status: "Ativo",
-    enrollment: "2021001"
-  },
-  {
-    fullname: "Bruno Henrique Souza",
-    email: "bruno.souza@email.com",
-    course: "Ciência da Computação",
-    semester: "3º",
-    status: "Ativo",
-    enrollment: "2021023"
-  },
-  {
-    fullname: "Carla Mendes Oliveira",
-    email: "carla.oliveira@email.com",
-    course: "Sistemas de Informação",
-    semester: "7º",
-    status: "Trancado",
-    enrollment: "2020008"
-  },
-  {
-    fullname: "Diego Ferreira Costa",
-    email: "diego.costa@email.com",
-    course: "Análise e Desenvolvimento de Sistemas",
-    semester: "4º",
-    status: "Ativo",
-    enrollment: "2021045"
-  },
-  {
-    fullname: "Eduarda Lima Santos",
-    email: "eduarda.santos@email.com",
-    course: "Engenharia da Computação",
-    semester: "6º",
-    status: "Inativo",
-    enrollment: "2019056"
-  }
-]
+    {
+      fullname: "Ana Clara Ribeiro",
+      email: "ana.ribeiro@example.com",
+      course: "Design Gráfico",
+      semester: "3º",
+      status: "Ativo",
+      enrollment: "202200145",
+    },
+    {
+      fullname: "Lucas Fernandes",
+      email: "lucas.fernandes@example.com",
+      course: "Engenharia de Software",
+      semester: "5º",
+      status: "Ativo",
+      enrollment: "202101223",
+    },
+    {
+      fullname: "Mariana Souza",
+      email: "mariana.souza@example.com",
+      course: "Arquitetura e Urbanismo",
+      semester: "7º",
+      status: "Trancado",
+      enrollment: "202000912",
+    },
+    {
+      fullname: "Rafael Martins",
+      email: "rafael.martins@example.com",
+      course: "Publicidade e Propaganda",
+      semester: "4º",
+      status: "Ativo",
+      enrollment: "202200334",
+    },
+    {
+      fullname: "Beatriz Lima",
+      email: "beatriz.lima@example.com",
+      course: "Design de Produto",
+      semester: "2º",
+      status: "Ativo",
+      enrollment: "202301121",
+    },
+    {
+      fullname: "Pedro Henrique Alves",
+      email: "pedro.alves@example.com",
+      course: "Ciência da Computação",
+      semester: "6º",
+      status: "Inativo",
+      enrollment: "202001589",
+    },
+    {
+      fullname: "Carolina Oliveira",
+      email: "carolina.oliveira@example.com",
+      course: "Moda",
+      semester: "8º",
+      status: "Ativo",
+      enrollment: "201901002",
+    },
+    {
+      fullname: "Felipe Santos",
+      email: "felipe.santos@example.com",
+      course: "Design de Interiores",
+      semester: "1º",
+      status: "Ativo",
+      enrollment: "202402031",
+    },
+    {
+      fullname: "Juliana Costa",
+      email: "juliana.costa@example.com",
+      course: "Engenharia de Produção",
+      semester: "9º",
+      status: "Formando",
+      enrollment: "201800876",
+    },
+    {
+      fullname: "Vinícius Rocha",
+      email: "vinicius.rocha@example.com",
+      course: "Análise e Desenvolvimento de Sistemas",
+      semester: "5º",
+      status: "Ativo",
+      enrollment: "202101777",
+    },
+  ];
 
-const columnHelper = createColumnHelper<Student>()
+  const columnHelper = createColumnHelper<Student>()
 
-const columns = [
-  columnHelper.accessor("fullname", {
-    header: "Nome Completo",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("email", {
-    header: "Email",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("course", {
-    header: "Curso",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("semester", {
-    header: "Semestre",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("status", {
-    header: "Status",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("enrollment", {
-    header: "Matéria",
-    cell: (info) => info.getValue(),
-  }),
-]
+  const columns = [
+    columnHelper.accessor("fullname", {
+      header: "Estudante",
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("course", {
+      header: "Curso",
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("semester", {
+      header: "Semestre",
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("status", {
+      header: "Status",
+      cell: (info) => info.getValue(),
+    }),
+     columnHelper.accessor("enrollment", {
+      header: "Matrícula",
+      cell: (info) => info.getValue(),
+    }),
+  ];
+
+  const [students, setStudents] = useState<Student[]>([]);
+
+  useEffect(() => {
+    async function load() {
+      const { data } = await api.get<GetStudentResponse>('/students');
+
+      setStudents(data.students);
+    }
+
+    load();
+  }, []);
 
   return (
     <DefaultLayout
@@ -92,10 +146,10 @@ const columns = [
       description="Gerencie informações dos estudantes matrículados"
     >
       <VStack align="start">
-        <HeaderTable />
+        <StudentsHeader />
 
-        <Table data={data} columns={columns} />
+        <Table data={students} columns={columns} />
       </VStack>
     </DefaultLayout>
-  );
+  )
 }

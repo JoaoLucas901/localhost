@@ -1,19 +1,18 @@
-import { Table as ChakraTable} from "@chakra-ui/react"
+import { Table as ChakraTable } from "@chakra-ui/react";
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 
 type TableProps = {
   columns: any;
   data: any;
 }
 
-export function Table ({columns, data }: TableProps) {
+export function Table({ columns, data }: TableProps) {
   const table = useReactTable({
     data,
     columns,
