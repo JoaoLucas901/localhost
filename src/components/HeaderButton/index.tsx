@@ -1,12 +1,15 @@
-import { Card, createListCollection, HStack, SimpleGrid } from "@chakra-ui/react";
-import { useState } from "react";
-import { AddButton } from "./AddButton";
+import { Card, createListCollection, HStack, SimpleGrid, Button } from "@chakra-ui/react";
+import { useState, ReactNode } from "react";
 import { ExportButton } from "./ExportButton";
 import { FilterButton } from "./FilterButton";
 import { FilterSelect } from "./FilterSelect";
 import { SearchInput } from "./SearchInput";
 
-export function StudentsHeader() {
+export function HeaderTable() {
+  function AddButton({ children, ...props }: { children?: ReactNode; [key: string]: any }) {
+    return <Button colorScheme="blue" size="sm" {...props}>{children}</Button>;
+  }
+
   const status = createListCollection({
     items: [
       { label: "Inátivo", value: "inativo" },

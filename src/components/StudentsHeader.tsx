@@ -1,12 +1,13 @@
 import { Card, createListCollection, HStack, SimpleGrid } from "@chakra-ui/react";
 import { useState } from "react";
-import { AddButton } from "./AddButton";
-import { ExportButton } from "./ExportButton";
-import { FilterButton } from "./FilterButton";
-import { FilterSelect } from "./FilterSelect";
-import { SearchInput } from "./SearchInput";
+import { AddButton } from "./HeaderButton/AddButton";
+import { AddStudentDialog } from "./AddStudentDialog";
+import { ExportButton } from "./HeaderButton/ExportButton";
+import { FilterButton } from "./HeaderButton/FilterButton";
+import { FilterSelect } from "./HeaderButton/FilterSelect";
+import { SearchInput } from "./HeaderButton/SearchInput";
 
-export function HeaderTable() {
+export function StudentsHeader() {
   const status = createListCollection({
     items: [
       { label: "Inátivo", value: "inativo" },
@@ -39,9 +40,7 @@ export function HeaderTable() {
 
             <ExportButton onClick={() => console.log()} />
 
-            <AddButton>
-              Novo Estudante
-            </AddButton>
+            <AddStudentDialog />
           </HStack>
         </SimpleGrid>
       </Card.Body>
